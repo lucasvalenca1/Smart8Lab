@@ -1,98 +1,65 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
 
-	<head>
+    <title>GEO search</title>
+    <meta name="description" content="AJAX/PHP/CURL/JSON example" />
+    <meta name="author" content="Paddy Evans" />
+  </head>
 
-		<meta charset="utf-8">
+  <body>
+    <select id="selCountry">
+      <option value="GB">Great Britain</option>
+      <option value="FR">France</option>
+      <option value="DE">Germany</option>
+      <option value="US">USA</option>
+    </select>
 
-		<title>AJAX/PHP/CURL/JSON example</title>
-		<meta name="description" content="AJAX/PHP/CURL/JSON example">
-		<meta name="author" content="Paddy Evans">
+    <select id="selLanguage">
+      <option value="en">English</option>
+      <option value="fr">Francais</option>
+      <option value="de">Deutsche</option>
+    </select>
 
-	</head>
+    <button id="btnRun">Run</button>
 
-	<body>
+    <br /><br />
 
-		<select id="selCountry">
-			<option value="GB">Great Britain</option>
-			<option value="FR">France</option>
-			<option value="DE">Germany</option>
-			<option value="US">USA</option>
-		</select>
+    <div id="divResults">
+      <table>
+        <tr>
+          <td align="right">Continent:</td>
+          <td id="txtContinent"></td>
+        </tr>
 
-		<select id="selLanguage">
-			<option value="en">English</option>
-			<option value="fr">Francais</option>
-			<option value="de">Deutsche</option>
-		</select>
+        <tr>
+          <td align="right">Capital:</td>
+          <td id="txtCapital"></td>
+        </tr>
 
-		<button id="btnRun">Run</button>
+        <tr>
+          <td align="right">Languages:</td>
+          <td id="txtLanguages"></td>
+        </tr>
 
-		<br><br>
+        <tr>
+          <td align="right">Population:</td>
+          <td id="txtPopulation"></td>
+        </tr>
 
-		<div id="divResults">
-			
-			<table>
+        <tr>
+          <td align="right">Area (km<sup>2</sup>):</td>
+          <td id="txtArea"></td>
+        </tr>
+      </table>
+    </div>
 
-				<tr>
-					<td align="right">
-						Continent: 
-					</td>
-					<td id="txtContinent">
-						
-					</td>
-
-				</tr>
-
-				<tr>
-					<td align="right">
-						Capital: 
-					</td>
-					<td id="txtCapital">
-						
-					</td>
-
-				</tr>
-
-				<tr>
-					<td align="right">
-						Languages: 
-					</td>
-					<td id="txtLanguages">
-						
-					</td>
-
-				</tr>
-
-				<tr>
-					<td align="right">
-						Population: 
-					</td>
-					<td id="txtPopulation">
-						
-					</td>
-
-				</tr>
-
-				<tr>
-					<td align="right">
-						Area (km<sup>2</sup>): 
-					</td>
-					<td id="txtArea">
-						
-					</td>
-
-				</tr>
-
-
-			</table>
-
-		</div>
-
-		<script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
-		<script type="application/javascript" src="libs/js/script.js"></script>
-
-	</body>
-
+    <script
+      type="application/javascript"
+      src="libs/js/jquery-2.2.3.min.js"
+    ></script>
+    <script type="application/javascript" src="libs/js/script.js"></script>
+  </body>
 </html>
