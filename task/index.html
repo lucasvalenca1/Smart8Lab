@@ -1,65 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
 
-    <title>GEO search</title>
-    <meta name="description" content="AJAX/PHP/CURL/JSON example" />
-    <meta name="author" content="Paddy Evans" />
-  </head>
+	<head>
 
-  <body>
-    <select id="selCountry">
-      <option value="GB">Great Britain</option>
-      <option value="FR">France</option>
-      <option value="DE">Germany</option>
-      <option value="US">USA</option>
-    </select>
+		<meta charset="utf-8">
 
-    <select id="selLanguage">
-      <option value="en">English</option>
-      <option value="fr">Francais</option>
-      <option value="de">Deutsche</option>
-    </select>
+		<title>ITCareersLab Geonames APIs</title>
+		<meta name="description" content="Search Geonames APIs Project">
+		<meta name="author" content="Lucas Valenca">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <button id="btnRun">Run</button>
+		<link href="favicon.ico" rel="icon" />
+		<link href="vendors/bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+	</head>
 
-    <br /><br />
+	<body>
 
-    <div id="divResults">
-      <table>
-        <tr>
-          <td align="right">Continent:</td>
-          <td id="txtContinent"></td>
-        </tr>
+		<div class="header"></div>
+		<div class="main">
 
-        <tr>
-          <td align="right">Capital:</td>
-          <td id="txtCapital"></td>
-        </tr>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>API name</th>
+						<th>API description</th>
+						<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>wikipedia-search-api<name></td>
+							<td>Wikipedia Fulltext Search. Url: php/wikipedia-search-api.php?place_name=
+								<input type="text" id="placeNameInput" placeholder="Enter place name">
+							</td>
+							<td><button type="submit" id="searchPlaceNameWikipediaBtn" class="btn btn-primary">Submit</button></td>
+						</tr>
+						<tr>
+							<td>timezone-api<name></td>
+							<td>Timezone. Url: php/timezone-api.php?latitude=<input type="text" id="latitudeInput" value="47.01" placeholder="Latitude">&longitude=<input type="text" id="longitudeInput" value="10.02" placeholder="Longitude"></td>
+							<td><button type="submit" id="timezoneSearchBtn" class="btn btn-primary">Submit</button></td>
+						</tr>
+						<tr>
+							<td>postcode-api<name></td>
+							<td>Returns a list of postal codes and places for the postalcode query. Url: php/postalcode-api.php?&postal_code=<input type="text" id="postalcodeInput" value="9011" placeholder="Postalcode"></td>
+							<td><button type="submit" id="postCodeSearchBtn" class="btn btn-primary">Submit</button></td>
+						</tr>
+					</tbody>
+				</table>
+		</div>
 
-        <tr>
-          <td align="right">Languages:</td>
-          <td id="txtLanguages"></td>
-        </tr>
+		<div class="preloader"></div>
 
-        <tr>
-          <td align="right">Population:</td>
-          <td id="txtPopulation"></td>
-        </tr>
+		<div id="output"><!-- Output API Responses--></div>
 
-        <tr>
-          <td align="right">Area (km<sup>2</sup>):</td>
-          <td id="txtArea"></td>
-        </tr>
-      </table>
-    </div>
+		<script type="application/javascript" src="vendors/jquery/jquery-2.2.3.min.js"></script>
+		<script type="application/javascript" src="js/script.js"></script>
 
-    <script
-      type="application/javascript"
-      src="libs/js/jquery-2.2.3.min.js"
-    ></script>
-    <script type="application/javascript" src="libs/js/script.js"></script>
-  </body>
+	</body>
+
 </html>
