@@ -1,24 +1,19 @@
 <?php
-
-	// remove for production
-
-	ini_set('display_errors', 'On');
-	error_reporting(E_ALL);
+	//ini_set('display_errors', 'On');
+	//error_reporting(E_ALL);
 
 	$executionStartTime = microtime(true);
+	
+	$wikipediaUrl = "http://api.geonames.org/wikipediaSearchJSON?formatted=true&q=" . $_REQUEST['place_name'] . "&maxRows=10&username=lucasdvalenca002&style=full";
 
-	$url='http://api.geonames.org/countryInfoJSON?formatted=true&lang=' . $_REQUEST['lang'] . '&country=' . $_REQUEST['country'] . '&username=flightltd&style=full';
-
-	$ch = curl_init();
+	$ch = curl_init(); 
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_URL,$url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+	curl_setopt($ch, CURLOPT_URL,$wikipediaUrl); 
+	$result=curl_exec($ch); 
+	curl_close($ch); 
 
-	$result=curl_exec($ch);
-
-	curl_close($ch);
-
-	$decode = json_decode($result,true);	
+	$decode = json_decode($result,true); 
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
