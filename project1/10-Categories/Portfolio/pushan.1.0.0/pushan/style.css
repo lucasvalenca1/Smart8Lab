@@ -1,0 +1,260 @@
+/*
+Theme Name: Pushan
+Theme URI: https://wpkoi.com/pushan-wpkoi-wordpress-theme/
+Template: lalita
+Author: wpkoithemes
+Author URI: https://wpkoi.com
+Description: Pushan is a child theme for Lalita WPKoi theme. You can find theme demos at wpkoi.com. Pushan has a girlish, red and pink style and design for portfolio, business or agency content. The theme is multipurpose, so if You like the style, You can use it to represent Your art, business, an event, show Your portfolio, start a blog, start a webshop and sell Your products etc. The demos use Elementor, WooCommerce and Contact Form 7 plugins. The premium demo uses the Pushan premium plugin also. Pushan has an easy to use admin with a lot of customizer functions, so You can build Your dream without coding knowledge. The theme is responsive so looks good on almost every devices. You can setup multiple header styles, navigation styles and layouts. Build You site with Pushan Theme and share it with the world! You can also find a documentation with an install guide and a tutorial for the screenshot look on wpkoi.com/docs.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: pushan
+Tags: two-columns, three-columns, one-column, right-sidebar, left-sidebar, footer-widgets, blog, e-commerce, flexible-header, full-width-template, custom-header, custom-background, custom-menu, custom-colors, sticky-post, threaded-comments, translation-ready, featured-images
+
+*/
+
+body {
+  background-color: #f5dbdf;
+  padding: 0 0 0 30px;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.lalita-side-left-cover {
+  width: 30px;
+}
+
+.inside-top-bar {
+  padding: 5px 20px 2px;
+}
+
+.top-bar {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.inside-header {
+  padding: 5px 20px;
+}
+
+.main-title {
+  text-transform: none;
+}
+
+.main-navigation a {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.main-navigation .main-nav ul li a,
+.main-navigation .mobile-bar-items a,
+.menu-toggle {
+  padding-left: 9px;
+  padding-right: 9px;
+  line-height: 70px;
+}
+
+.menu-item-has-children .dropdown-menu-toggle {
+  padding-left: 9px;
+}
+
+header .is_stuck.main-navigation .main-nav ul li.wpkoi-nav-btn-h {
+  display: inline-flex;
+}
+
+.navigation-effect-stylea #site-navigation .main-nav ul li.menu-item a:focus::after, .navigation-effect-stylea #site-navigation .main-nav ul li.menu-item a:focus::before, .navigation-effect-stylea #site-navigation .main-nav ul li.menu-item a:hover::after, .navigation-effect-stylea #site-navigation .main-nav ul li.menu-item a:hover::before, .navigation-effect-stylea #site-navigation .main-nav ul li.menu-item.current-menu-item a::after, .navigation-effect-stylea #site-navigation .main-nav ul li.menu-item.current-menu-item a::before {
+  font-weight: 600;
+}
+
+.nav-float-right .is_stuck.main-navigation {
+  margin-left: 30px;
+  width: calc(100% - 30px - 0px) !important;
+}
+
+.fluid-header.sticky-enabled .main-navigation.is_stuck .inside-navigation {
+  padding-left: 30px;
+}
+
+.button,
+.woocommerce a.button,
+.woocommerce button.button {
+  padding: 12px 25px;
+}
+
+.button, .button:visited, button:not(.menu-toggle), html input[type=button], input[type=reset], input[type=submit] {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"], a.button, a.button:visited, header .main-navigation .main-nav ul li a.wpkoi-nav-btn {
+  box-shadow: 5px 5px 0px 0px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+.lalita-button-radius-full .button, .lalita-button-radius-full .woocommerce a.button, .lalita-button-radius-full .woocommerce button.button {
+  border-radius: 25px 0px 25px 0px !important;
+}
+
+button:hover, html input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, a.button:hover, button:focus, html input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus, a.button:focus, header .main-navigation .main-nav ul li a.wpkoi-nav-btn:hover {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.site-info {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.lalita-back-to-top, .lalita-back-to-top:visited {
+  border-radius: 50px;
+  right: 10px;
+}
+
+.lalita-side-left-content {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 265px 0px 0px 0px;
+}
+
+.lalita-side-left-content .lalita-side-left-socials ul {
+  padding: 15px 4px;
+}
+
+.lalita-side-left-content .lalita-side-left-text {
+  padding: 4px 15px;
+}
+
+.page-header-blog-content-h {
+  display: block;
+}
+
+.page-header-blog-content-h .page-header-blog-content {
+  margin: 0;
+  display: inline-block;
+  padding: 0 0 40px;
+  width: 49%;
+}
+
+.page-header-blog-image {
+  display: inline-block;
+  width: 50%;
+  vertical-align: bottom;
+}
+
+.page-header-blog-text, .page-header-blog-button {
+  display: block;
+  width: 100%;
+}
+
+.page-header-blog-content h2 {
+  font-size: 80px;
+  font-weight: 900;
+  padding: 0;
+  line-height: 1;
+  margin-bottom: 30px;
+}
+
+.page-header-blog-content p {
+  font-size: 22px;
+  font-weight: 500;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.page-header-blog-content a.button {
+  border-radius: 0;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.page-header-blog {
+  padding: 0;
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.page-header-blog-inner {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.site-footer .footer-widgets-container .inner-padding {
+  padding: 0 0 20px 40px;
+}
+
+.pushan-dotted-div .article-holder {
+  border-bottom: 2px dashed;
+  padding-bottom: 20px;
+}
+
+.pushan-dotted-div .sidebar .widget .widget-title {
+  border-bottom: 2px dashed;
+}
+
+.pushan-colorized-img .post-image img:hover {
+  -webkit-filter: hue-rotate(90deg);
+  filter: hue-rotate(90deg);
+}
+
+.footer-bar .lalita-social-bar {
+  float: right;
+}
+
+.footer-bar .lalita-socials-list li {
+  display: inline-block;
+  padding-left: 8px;
+}
+
+.elementor-page .screen-reader-text {
+	top: inherit;
+}
+
+.inside-navigation .search-form input[type="search"]:focus {
+    color: #333333 !important;
+}
+
+@media (max-width: 1024px) {
+  .page-header-blog-content-h h2 {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header-blog-content-h h2 {
+    font-size: 40px;
+    margin-top: 30px;
+  }
+  
+  .page-header-blog-content-h p {
+    font-size: 22px;
+  }
+  
+  .page-header-blog-content-h .page-header-blog-content, .page-header-blog-image {
+    width: 100%;
+  }
+
+  body {
+    padding: 0;
+  }
+
+  .lalita-side-left-cover, .lalita-side-right-cover {
+    width: 0;
+  }
+
+  .footer-bar .widget, .footer-bar .lalita-social-bar {
+    float: none;
+    margin: 0 10px;
+  }
+}
