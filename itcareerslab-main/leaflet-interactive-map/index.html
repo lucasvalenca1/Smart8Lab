@@ -1,0 +1,55 @@
+<!doctype html>
+
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Gazetteer</title>
+		<meta name="description" content="Interactive Map">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link href="favicon.ico" rel="icon" />
+		<link href="vendors/bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="vendors/leaflet/leaflet.css"/>
+		<link rel="stylesheet" href="vendors/leaflet/MarkerCluster.css" />
+		<link rel="stylesheet" href="vendors/leaflet/MarkerCluster.Default.css" />
+		<script src="vendors/leaflet/leaflet.js"></script>
+		<script src="vendors/leaflet/leaflet.markercluster-src.js"></script>
+		<script src="vendors/leaflet/leaflet-easybutton.js"></script>
+	</head>
+
+	<body>
+
+		<span id="selectContainer">
+			<select id="countrySelect" class="form-select" aria-label="Select country">
+				<option selected>Select a country</option>
+				<!-- Options will be dynamically added here -->
+				</select>
+		</span>
+
+		<div id="map"></div>
+
+		<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="infoModalLabel">Everything about <span id="countryName"></span></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body" id="infoPanel">
+					<!-- Details will be inserted here by updateUI function -->
+				</div>
+			</div>
+		</div>
+		</div>
+
+		<script type="application/javascript" src="vendors/jquery/jquery-2.2.3.min.js"></script>
+		<script type="application/javascript" src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
+		<script type="application/javascript" src="js/script.js"></script>
+
+	</body>
+
+</html>
