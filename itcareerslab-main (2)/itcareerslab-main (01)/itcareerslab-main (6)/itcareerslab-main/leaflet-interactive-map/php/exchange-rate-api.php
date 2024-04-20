@@ -1,5 +1,5 @@
 <?php
-require_once 'apikeys.php';
+require_once __DIR__ . '/config.php';
 
 $url = "https://openexchangerates.org/api/latest.json?app_id=" . OPEN_EXCHANGE_RATES_API_KEY;
 
@@ -10,4 +10,3 @@ $response = curl_exec($ch);
 curl_close($ch);
 
 echo $response;
-?>

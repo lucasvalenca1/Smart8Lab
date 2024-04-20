@@ -1,12 +1,12 @@
 <?php
-require_once 'apikeys.php';
+require_once __DIR__ . '/config.php';
 $countryName = isset($_GET['query']) ? urlencode($_GET['query']) : '';
 $lat = isset($_GET['lat']) ? $_GET['lat'] : '';
 $lng = isset($_GET['lng']) ? $_GET['lng'] : '';
 
-if($countryName != "") {
+if ($countryName != "") {
     $url = "https://api.opencagedata.com/geocode/v1/json?q={$countryName}&key=" . OPEN_CAGE_DATA_API_KEY;
-}else{
+} else {
     $url = "https://api.opencagedata.com/geocode/v1/json?q={$lat}+{$lng}&key=" . OPEN_CAGE_DATA_API_KEY;
 }
 
@@ -19,4 +19,3 @@ $response = curl_exec($ch);
 curl_close($ch);
 
 echo $response;
-?>

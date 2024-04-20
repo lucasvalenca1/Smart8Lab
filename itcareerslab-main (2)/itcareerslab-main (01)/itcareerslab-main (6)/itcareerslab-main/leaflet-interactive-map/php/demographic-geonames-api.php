@@ -1,5 +1,5 @@
 <?php
-require_once 'apikeys.php';
+require_once __DIR__ . '/config.php';
 
 $demographics = "http://api.geonames.org/countryInfoJSON?formatted=true&country=" . $_REQUEST['country_iso_code'] . "&username=" . GEONAMES_API_KEY . "&style=full";
 

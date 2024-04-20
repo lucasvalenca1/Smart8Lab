@@ -1,5 +1,5 @@
 <?php
-require_once 'apikeys.php';
+require_once __DIR__ . '/config.php';
 $lat = $_GET['lat'];
 $lon = $_GET['lon'];
 
@@ -12,4 +12,3 @@ $response = curl_exec($ch);
 curl_close($ch);
 
 echo $response;
-?>
