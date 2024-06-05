@@ -1,0 +1,2 @@
+
+{"status":{"code":"200","name":"ok","description":"success","returnedIn":"6.9499015808105E-7 ms"},"data":[{"id":"30","name":"Canc\u00f9n"},{"id":"1","name":"London"},{"id":"4","name":"Munich"},{"id":"2","name":"New York"},{"id":"3","name":"Paris"},{"id":"5","name":"Rome"}]}

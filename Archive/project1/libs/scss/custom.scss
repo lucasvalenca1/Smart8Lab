@@ -1,0 +1,10 @@
+$light: #bfd2e2;
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: $light; /* Choose your own color here */
+}

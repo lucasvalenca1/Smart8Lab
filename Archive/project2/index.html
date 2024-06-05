@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Directory</title>
+    <link rel="icon" type="image/x-icon" href="libs/images/favicon.ico">
+    <!-- custom css -->
+    <link rel="stylesheet" href="libs/css/styles.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- jquery -->
+    <link rel="stylesheet" href="">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    
+  </head>
+<body>
+
+  <div class="fade-me">
+    <div class="spinner-border text-warning" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+    
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Company Directory</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <button id="show-employee-button" type="button" class="btn btn-light m-1">Employees</button>
+            </li>
+            <li class="nav-item">
+              <button id="show-department-button" type="button" class="btn btn-light m-1">Departments</button>
+            </li>
+            <li class="nav-item">
+              <button id="show-location-button" type="button" class="btn btn-light m-1">Locations</button>
+            </li>
+          </ul>
+          <form class="d-flex ms-1">
+            <input id="search-bar" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          </form>
+        </div>
+      </div>
+    </nav>
+  </nav>
+
+<!-- Employee Table -->
+  <table id="employee-table" class="table table-light table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col" class="d-none d-md-table-cell">Role</th>
+        <th scope="col" class="d-none d-lg-table-cell">Email</th>
+        <th scope="col" class="d-none d-md-table-cell">Department</th>
+        <th scope="col" class="d-none d-lg-table-cell">Location</th>
+        <th scope="col" colspan="3" class="row-button text-end">
+          <button id="create-employee-modal-button" type="button" class="btn btn-success"><i class="fa-solid fa-user-plus"></i></button>
+        </th>
+      </tr>
+    </thead>
+    <tbody id="employee-list">
+    </tbody>
+  </table>
+    
+<!-- Department Table -->
+    <table id="department-table" class="table table-light table-striped table-hover d-none">
+      <thead>
+        <tr>
+          <th scope="col">Department</th>
+          <th scope="col">Location</th>
+          <th scope="col" colspan="2" class="row-button">
+            <button id="create-department-modal-button" type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="department-list">
+      </tbody>
+    </table>
+<!-- Location Table -->
+    <table id="location-table" class="table table-light table-striped table-hover d-none">
+      <thead>
+        <tr>
+          <th scope="col">Location</th>
+          <th scope="col" colspan="2" class="row-button">
+            <button id="create-location-modal-button" type="button" class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="location-list">
+      </tbody>
+    </table>
+
+    <!-- Create Employee Modal -->
+    <div id="create-employee-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create a new employee</h5>
+          </div>
+          <div class="modal-body">
+            
+            <form>
+              <div class="form-group mb-3">
+                <label class="form-label" for="new-employee-forename">First Name</label>
+                <input type="text" class="form-control" id="new-employee-forename" placeholder="Jane" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+                <p class="d-none">Please provide a valid first name</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="new-employee-surname">Last Name</label>
+                <input type="text" class="form-control" id="new-employee-surname" placeholder="Doe" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+                <p class="d-none">Please provide a valid last name</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="new-employee-role">Job Title</label>
+                <input type="text" class="form-control" id="new-employee-role" placeholder="Analyst" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+                <p class="d-none">Please provide a valid name job title</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="new-employee-email">Email Address</label>
+                <input type="email" class="form-control" id="new-employee-email" placeholder="jane.doe@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                <p class="d-none">Please provide a valid email address</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="new-employee-department">Department</label>
+                <select class="form-control valid" id="new-employee-department" required>
+                </select>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button id="create-employee-button"type="button" class="btn btn-primary disabled">Create Employee</button>
+            <button id="close-create-employee-button" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Update Employee Modal -->
+    <div id="update-employee-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Update employee details</h5>
+          </div>
+          <div class="modal-body">
+            
+            <form>
+              <div class="form-group mb-3">
+                <label class="form-label" for="employee-forename">Forename</label>
+                <input type="text" class="form-control" id="employee-forename" placeholder="Jane" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+                <p class="d-none">Please provide a valid first name</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="employee-surname">Surname</label>
+                <input type="text" class="form-control" id="employee-surname" placeholder="Doe" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+                <p class="d-none">Please provide a valid last name</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="employee-role">Job Role</label>
+                <input type="text" class="form-control" id="employee-role" placeholder="Analyst" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+                <p class="d-none">Please provide a valid name job title</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="employee-email">Email Address</label>
+                <input type="email" class="form-control" id="employee-email" placeholder="jane.doe@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                <p class="d-none">Please provide a valid email address</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="employee-department">Department</label>
+                <select class="form-control" id="employee-department">
+                </select>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button id="update-employee-button" type="button" class="btn btn-primary">Update Details</button>
+            <button id="close-update-employee-button" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Delete Employee Modal -->
+    <div id="delete-employee-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete employee</h5>
+          </div>
+          <div id="delete-employee-modal-body"class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button id="delete-employee-button" type="button" class="btn btn-primary">Yes</button>
+            <button id="close-delete-employee-button" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Create Department Modal -->
+    <div id="create-department-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create a new department</h5>
+          </div>
+          <div class="modal-body">
+            
+            <form>
+              <div class="form-group mb-3">
+                <label class="form-label" for="new-department-name">Department Name</label>
+                <input type="text" class="form-control" id="new-department-name" placeholder="Finance" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+                <p class="d-none">Please provide a valid department name</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="new-department-location">Location</label>
+                <select class="form-control" id="new-department-location">
+                </select>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button id="create-department-button" type="button" class="btn btn-primary disabled">Create Department</button>
+            <button id="close-create-department-button" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Update Department Modal -->
+    <div id="update-department-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Update department</h5>
+          </div>
+          <div class="modal-body">
+            
+            <form>
+              <div class="form-group mb-3">
+                <label class="form-label" for="department-name">Department Name</label>
+                <input type="text" class="form-control" id="department-name" placeholder="Finance" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+                <p class="d-none">Please provide a valid department name</p>
+              </div>
+              <div class="form-group mb-3">
+                <label class="form-label" for="department-location">Location</label>
+                <select class="form-control" id="department-location">
+                </select>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button id="update-department-button" type="button" class="btn btn-primary">Update Department</button>
+            <button id="close-update-department-button" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Delete Department Modal -->
+  <div id="delete-department-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete department</h5>
+        </div>
+        <div id="delete-department-modal-body"class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button id="delete-department-button" type="button" class="btn btn-primary">Yes</button>
+          <button id="close-delete-department-button" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Create Location Modal -->
+  <div id="create-location-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create a new location</h5>
+        </div>
+        <div class="modal-body">
+          
+          <form>
+            <div class="form-group mb-3">
+              <label class="form-label" for="new-location-name">Location Name</label>
+              <input type="text" class="form-control" id="new-location-name" placeholder="Portugal" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+              <p class="d-none">Please provide a valid location name</p>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button id="create-location-button" type="button" class="btn btn-primary disabled">Create Location</button>
+          <button id="close-create-location-button" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Update Location Modal -->
+  <div id="update-location-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update a location</h5>
+        </div>
+        <div class="modal-body">
+          
+          <form>
+            <div class="form-group mb-3">
+              <label class="form-label" for="location-name">Location Name</label>
+              <input type="text" class="form-control" id="location-name" placeholder="Portugal" pattern="^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$" required>
+              <p class="d-none">Please provide a valid location name</p>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button id="update-location-button" type="button" class="btn btn-primary">Update Location</button>
+          <button id="close-update-location-button" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Location Modal -->
+  <div id="delete-location-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete location</h5>
+        </div>
+        <div id="delete-location-modal-body"class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button id="delete-location-button" type="button" class="btn btn-primary">Yes</button>
+          <button id="close-delete-location-button" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Alert Modal -->
+<div id="alert-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning bg-gradient">
+        <h5 class="modal-title"><i class="fa-solid fa-triangle-exclamation"></i></h5>
+      </div>
+      <div class="modal-body">
+        <p id="alert-message"></p>
+      </div>
+      <div class="modal-footer bg-warning bg-gradient">
+        <button id="close-alert-modal-button" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Alert -->
+    <div id="toast-wrapper"class="position-fixed bottom-0 end-0 p-3">
+      <div id="toast-alert" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header"> 
+          <strong id="toast-title" class="me-auto"></strong>
+          <button id="close-toast-button" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div id="toast-message" class="toast-body"> 
+        </div>
+      </div>
+    </div>
+
+    <!-- jquery -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- font-awesome -->
+    <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <!-- boostrap -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- script -->
+    <script src="libs/js/script.js"></script>
+</body>
+</html>

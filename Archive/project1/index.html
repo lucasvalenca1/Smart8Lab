@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Gazetter">
+    <meta name="author" content="Cassio Fortunato, and Bootstrap contributors">
+
+    <title>Gazetteer</title>
+
+    <link rel="icon" type="image/x-icon" href="libs/images/favicon.ico">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../bootstrap.min.css" >
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+    <!-- Leaflet EasyButton -->
+    <link rel="stylesheet" href="node_modules/leaflet-easybutton/src/easy-button.css">
+    <!-- Leaflet ExtraMarkers -->
+    <link rel="stylesheet" href="node_modules/leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css">
+    <!-- Leaflet MarkerCluster -->
+    <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Gazetter -->
+    <link rel="stylesheet" href="libs/css/gazetteer.css">
+    <!-- Sass -->
+    <link rel="stylesheet" href="libs/css/custom.css">
+
+  </head>
+ 
+  <body class="d-flex h-100 text-center">
+
+    <div class="fade-me">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div id= "wrapper "class="wrapper d-flex w-100 h-100 mx-auto flex-column">
+
+        <select id="country-select" class="form-select mt-3" aria-label="Default select example">
+          <option selected></option>  
+        </select>
+
+        <div id="x"></div>
+        <div id="map" class="h-100">
+        </div>
+
+    </div>
+    
+    <!-- Country Modal -->
+    <div id="country-info-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="country information modal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+              <table class="table table-striped m-0">
+                <thead>
+                  <tr>
+                    <th class="p-4" scope="col" colspan="3">
+                      <h5 id="country-name" ></h5>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="align-middle text-start p-4" scope="row"><i class="fa-regular fa-circle-dot"></i></th>
+                    <td id="capital-name" class="align-middle text-end p-4"></td>
+                  </tr>
+                  <tr>
+                    <th class="align-middle text-start p-4" scope="row"><i class="fa-solid fa-user-group"></i></th>
+                    <td id="country-population" class="align-middle text-end p-4"></td>
+                  </tr>
+                  <tr>
+                    <th class="align-middle text-start p-4" scope="row"><i class="fa-solid fa-coins"></i></th>
+                    <td id="country-currency-code" class="align-middle text-end p-4"></td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>         
+          <div class="input-group modal-body mx-auto">
+            <span class="input-group-text bg-light" id="basic-addon2">GBP</span>
+            <input id="gbp-value" type="number" class="form-control" value="1.00" aria-label="ammount in gbp" aria-describedby="basic-addon2">
+            <span class="input-group-text bg-light" id="basic-addon2"><i class="fa-solid fa-right-left"></i></span>
+            <input id="exchange-rate" type="number" class="form-control" aria-label="ammount in selected currency" aria-describedby="basic-addon2">
+            <span id="currency-code-label" class="input-group-text bg-light"></span>
+          </div>
+        </div>
+      </div>    
+    </div>
+
+    <!-- Weather Modal -->
+    <div id="weather-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body">
+
+            <div class="container">
+
+              <div class="row py-2">
+                <div class=" col modal-title text-start fs-4" id="weather-capital-name"></div>
+              </div>
+
+              <div class="row">
+                <div id="this-week-day" class="col text-start fs-5 bg-light text-white"></div>
+              </div>
+
+              <div class="row py-2 border-bottom border-1 border-light">
+                <div id="current-weather-icon" class="col col-auto align-self-center"><i class="fa-solid fa-sun"></i></div>
+                <div id="capital-temp" class="col col-auto align-self-center text-start"></div>
+                <div class="col align-self-center text-start border-start border-1 border-light">
+                  <div class="row py-2">
+                    <div class="col align-self-center" id="current-max"></div>
+                  </div>
+                  <div class="row py-2">
+                    <div class="col align-self-center" id="current-min"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row py-2">    
+                <div id="current-condition" class="col text-start align-self-center"></div>
+              </div>
+
+              <div class="row py-2">
+
+                <div class="col bg-light">
+                  <div class="row">
+                    <div id="second-day" class="col text-start days"></div>
+                  </div>     
+                  <div class="row">
+                    <div id="second-day-icon" class="col align-self-center"></div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col" id="second-max"></div>
+                        <div class="col" id="second-min"></div>
+                      </div>
+                    </div>
+                  </div>      
+                </div> <!-- Second Day Columnn --> 
+
+                <div class="col">
+                  <div class="row">
+                    <div id="third-day" class="col text-start days"></div>
+                  </div>     
+                  <div class="row">
+                    <div id="third-day-icon" class="col align-self-center"></div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col" id="third-max"></div>
+                        <div class="col" id="third-min"></div>
+                      </div>
+                    </div>
+                  </div>      
+                </div> <!-- Third Day Columnn --> 
+
+                <div class="col bg-light">
+                  <div class="row">
+                    <div id="fourth-day" class="col text-start days"></div>
+                  </div>     
+                  <div class="row">
+                    <div id="fourth-day-icon" class="col align-self-center"></div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col" id="fourth-max"></div>
+                        <div class="col" id="fourth-min"></div>
+                      </div>
+                    </div>
+                  </div>      
+                </div> <!-- Fourth Day Columnn --> 
+
+                <div class="col">
+                  <div class="row">
+                    <div id="fifth-day" class="col text-start days"></div>
+                  </div>     
+                  <div class="row">
+                    <div id="fifth-day-icon" class="col align-self-center"></div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col" id="fifth-max"></div>
+                        <div class="col" id="fifth-min"></div>
+                      </div>
+                    </div>
+                  </div>      
+                </div> <!-- Fifth Day Columnn --> 
+                
+              </div> 
+
+            </div> 
+            
+          </div> <!-- Modal Body -->
+          
+        </div> <!-- Modal Content -->
+      </div> <!-- Modal Dialog -->
+    </div> <!-- Weather Modal -->
+    
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="error modal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+          </div>         
+          <div class="input-group modal-body mx-auto">
+            <p>Sorry! It seems that this content is not available for this country.</p>
+          </div>
+        </div>
+      </div>    
+    </div>
+
+<!-- Pictures Modal -->
+    <div id="pictures-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="pictures modal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">    
+          <div class="input-group modal-body mx-auto">
+            
+            <div id="pictures-carousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#pictures-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#pictures-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#pictures-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#pictures-carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#pictures-carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img id="first-image" src="" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item">
+                  <img id="second-image" src="" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item">
+                  <img id="third-image" src="" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item">
+                  <img id="fourth-image" src="" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item">
+                  <img id="fifth-image" src="" class="d-block w-100" alt="">
+                </div>
+              </div>
+
+              <button class="carousel-control-prev" type="button" data-bs-target="#pictures-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#pictures-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>    
+    </div>
+
+    <!-- Covid Modal -->
+    <div id="covid-info-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="country information modal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <table class="table table-striped m-0">
+              <thead>
+                <tr>
+                  <th class="align-middle p-4" scope="col" colspan="3">
+                    <h5  id="covid-country-name" class=""></h5>
+                    <h5 class="">Covid Statistics</h5>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="align-middle text-start px-4 py-4" scope="row"><i class="fa-solid fa-viruses"></i></th>
+                  <td class="align-middle text-start px-0 py-4">Total Cases</td>
+                  <td id="confirmed-cases" class="align-middle text-end pe-4 py-4"></td>
+                </tr>
+                <tr>
+                  <th class="align-middle text-start px-4 py-4" scope="row"><i class="fa-solid fa-lungs-virus"></i></th>
+                  <td class="align-middle text-start px-0 py-4">Critical Cases</td>
+                  <td id="critical-cases" class="align-middle text-end pe-4 py-4"></td>
+                </tr>
+                <tr>
+                  <th class="align-middle text-start px-4 py-4" scope="row"><i class="fa-solid fa-skull"></i></th>
+                  <td class="align-middle text-start px-0 py-4">Deaths</td>
+                  <td id="death-cases" class="align-middle text-end pe-4 py-4"></td>
+                </tr>
+                <tr>
+                  <th class="align-middle text-start px-4 py-4" scope="row"><i class="fa-solid fa-virus-slash"></i></th>
+                  <td class="align-middle text-start px-0 py-4">Recoveries</td>
+                  <td id="recovered-cases" class="align-middle text-end pe-4 py-4"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>         
+        </div>
+      </div>    
+    </div>
+
+    <!-- News Modal -->
+    <div id="news-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="news modal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <div class="container">
+
+              <div class="row">
+
+                <div class="col">
+                  <div class="modal-header">
+                    <h5 id="news-country-name" class=""></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col my-4">
+                  
+                  <div class="card mx-auto" style="width: 18rem;">
+                    <img id="first-news-img" src="" class="card-img-top" alt="">
+                    <div class="card-body">
+                      <h5 id="first-news-title" class="card-title">Card title</h5>
+                      <p id="first-news-description" class="card-text"></p>
+                      <a id="first-news-link" href="" target="_blank" class="btn"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col my-4">
+                  
+                  <div class="card mx-auto" style="width: 18rem;">
+                    <img id="second-news-img" src="" class="card-img-top" alt="">
+                    <div class="card-body">
+                      <h5 id="second-news-title" class="card-title">Card title</h5>
+                      <p id="second-news-description" class="card-text"></p>
+                      <a id="second-news-link" href="" target="_blank" class="btn"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                  </div>
+
+                </div>
+                
+                <div class="col my-4">
+
+                  <div class="card mx-auto" style="width: 18rem;">
+                    <img id="third-news-img" src="" class="card-img-top" alt="">
+                    <div class="card-body">
+                      <h5 id="third-news-title" class="card-title">Card title</h5>
+                      <p id="third-news-description" class="card-text"></p>
+                      <a id="third-news-link" href="" target="_blank" class="btn"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+          </div>         
+        </div>
+      </div>    
+    </div>
+
+    <!-- jQuery -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet -->
+    <script src="node_modules/leaflet/dist/leaflet.js"></script>
+    <!-- Leaflet EasyButton -->
+    <script src="node_modules/leaflet-easybutton/src/easy-button.js"></script>
+    <!-- Leaflet ExtraMarkers -->
+    <script src="node_modules/leaflet-extra-markers/dist/js/leaflet.extra-markers.min.js"></script>
+    <!-- Leaflet MarkerCluster -->
+    <script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <!-- Font Awesome -->
+    <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <!-- Gazetter -->
+    <script src="libs/js/gazetteer.js"></script>
+    
+  </body>
+</html>
